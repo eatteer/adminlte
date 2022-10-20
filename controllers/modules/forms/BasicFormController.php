@@ -53,7 +53,6 @@ class BasicFormController
         "laravel" => $laravel,
         "language" => $language
       ],
-      "errors" => []
     ];
   }
 }

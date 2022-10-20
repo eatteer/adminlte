@@ -3,7 +3,6 @@
 
 <!-- Code -->
 <?php
-// Contains values and errors of the form
 $basicForm = [];
 BasicFormController::handleSubmittedBasicForm();
 ?>
@@ -36,23 +35,23 @@ BasicFormController::handleSubmittedBasicForm();
                 <!-- Email Text Input -->
                 <div class="form-group">
                   <label for="email">Email address</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
                 </div>
                 <!-- Password Password Input-->
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                 </div>
                 <!-- Jojo Lore Textarea Input -->
                 <div class="form-group">
                   <label>Jojo no Kimyo na Boken</label>
-                  <textarea class="form-control" rows="3" placeholder="Enter the lore"></textarea>
+                  <textarea class="form-control" rows="3" placeholder="Enter the lore" required></textarea>
                 </div>
                 <!-- File Input -->
                 <div class="form-group">
                   <label for="file">File input</label>
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="file" name="file">
+                    <input type="file" class="custom-file-input" id="file" name="file" required>
                     <label class="custom-file-label" for="file">Choose file</label>
                   </div>
                 </div>
