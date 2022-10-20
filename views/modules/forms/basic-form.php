@@ -3,6 +3,7 @@
 
 <!-- Code -->
 <?php
+// Contains values and errors of the form
 $basicForm = [];
 BasicFormController::handleSubmittedBasicForm();
 ?>
@@ -32,29 +33,60 @@ BasicFormController::handleSubmittedBasicForm();
             </div>
             <form method="POST" enctype="multipart/form-data">
               <div class="card-body">
+                <!-- Email Text Input -->
                 <div class="form-group">
                   <label for="email">Email address</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
                 </div>
+                <!-- Password Password Input-->
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                 </div>
+                <!-- Jojo Lore Textarea Input -->
+                <div class="form-group">
+                  <label>Jojo no Kimyo na Boken</label>
+                  <textarea class="form-control" rows="3" placeholder="Enter the lore"></textarea>
+                </div>
+                <!-- File Input -->
                 <div class="form-group">
                   <label for="file">File input</label>
-                  <div class="input-group">
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="file" name="file" required>
-                      <label class="custom-file-label" for="file">Choose file</label>
-                    </div>
-                    <div class="input-group-append">
-                      <span class="input-group-text">Upload</span>
-                    </div>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="file" name="file">
+                    <label class="custom-file-label" for="file">Choose file</label>
                   </div>
                 </div>
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="check" name="check" value="true">
-                  <label class="form-check-label" for="check">Check</label>
+                <!-- Framework Checkbox Input -->
+                <div class="form-group">
+                  <label>Which backend frameworks do you know?</label>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="nestjs" name="nestjs" value="true">
+                    <label class="form-check-label" for="check">NestJS</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="aspnetCore" name="aspnetCore" value="true">
+                    <label class="form-check-label" for="check">ASP.NET Core</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="laravel" name="laravel" value="true">
+                    <label class="form-check-label" for="check">Laravel</label>
+                  </div>
+                </div>
+                <!-- Language Radio Input -->
+                <div class="form-group">
+                  <label>Which language are you learning?</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="language" value="javascript">
+                    <label class="form-check-label">JavaScript</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="language" value="php">
+                    <label class="form-check-label">PHP</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="language" value="java">
+                    <label class="form-check-label">Java</label>
+                  </div>
                 </div>
               </div>
               <div class="card-footer">
@@ -82,7 +114,11 @@ BasicFormController::handleSubmittedBasicForm();
             </button>
           </div>
           <div class="modal-body">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium tempore deleniti iusto a harum provident voluptatem eveniet! Est explicabo ipsa, iusto natus nulla quae sequi ad itaque debitis enim molestias.</p>
+            <?php if (isset($basicForm["values"])) : ?>
+              <?php foreach ($basicForm["values"] as $key => $value) : ?>
+                <p><?= $key ?>: <?= $value ?></p>
+              <?php endforeach; ?>
+            <?php endif; ?>
           </div>
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -96,21 +132,17 @@ BasicFormController::handleSubmittedBasicForm();
   <script src="/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
   <script src="/adminlte/plugins/toastr/toastr.min.js"></script>
   <script src="/adminlte/lib/string-utils.js"></script>
+  <!-- Script for config file inputs -->
   <script>
     $(function() {
       bsCustomFileInput.init();
     });
   </script>
-  <?php if (boolval($basicForm["values"])) : ?>
+  <!-- Send script conditionally -->
+  <?php if (isset($basicForm["values"]) && boolval($basicForm["values"])) : ?>
     <script>
-      <?php $basicFormValues = json_encode($basicForm["values"]); ?>
-      const basicFormValues = <?= $basicFormValues ?>;
-      let message = "";
-      for (const [key, value] of Object.entries(basicFormValues)) {
-        const capitalizedKey = capitalize(key);
-        message += `(${capitalizedKey}: ${value})`;
-      }
-      toastr.info(message);
+      $('#modal-default').modal("show");
+      toastr.info("Toast");
     </script>
   <?php endif; ?>
 </body>
