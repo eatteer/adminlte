@@ -11,8 +11,9 @@ class BasicFormController
         "values" => [
           "email" => "",
           "password" => "",
-          "fileName" => "",
           "lore" => "",
+          "fileName" => "",
+          "anime" => "",
           "nestjs" => "",
           "aspnetCore" => "",
           "laravel" => "",
@@ -40,6 +41,8 @@ class BasicFormController
     $password = $_POST["password"] ?? "";
     // Textarea input
     $lore = $_POST["lore"] ?? "";
+    // Select input
+    $anime = $_POST["anime"] ?? "";
     // File input
     $file = $_FILES['file'];
     $fileName = $file["name"] ?? "";
@@ -57,6 +60,7 @@ class BasicFormController
       "password" => $password,
       "fileName" => $fileName,
       "lore" => $lore,
+      "anime" => $anime,
       "nestjs" => $nestjs,
       "aspnetCore" => $aspnetCore,
       "laravel" => $laravel,

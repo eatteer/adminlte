@@ -57,6 +57,17 @@ $viewData = $basicFormController->getViewData();
                     <label class="custom-file-label" for="file">Choose file</label>
                   </div>
                 </div>
+                <!-- Favorite Anime Select -->
+                <div class="form-group">
+                  <label for="name">Select your favorite anime</label>
+                  <select class="form-control" id="anime" name="anime">
+                    <option value="none">None</option>
+                    <option value="onePunchMan">One Punch Man</option>
+                    <option value="kimetsuNoYaiba">Kimetsu no Yaiba</option>
+                    <option value="shokugekiNoSoma">Shokugeki no Soma</option>
+                    <option value="mobPsycho">Mob Psycho</option>
+                  </select>
+                </div>
                 <!-- Framework Checkbox Input -->
                 <div class="form-group">
                   <label>Which backend frameworks do you know?</label>
