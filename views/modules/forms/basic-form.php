@@ -96,7 +96,6 @@ $viewData = $basicFormController->getViewData();
                   View submitted data
                 </button>
               </div>
-              <!-- <? print_r($viewData["basicForm"]["values"]); ?> -->
             </form>
           </div>
         </div>
@@ -110,7 +109,7 @@ $viewData = $basicFormController->getViewData();
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Modal</h4>
+            <h4 class="modal-title">Submitted data</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
