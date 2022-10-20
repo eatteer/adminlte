@@ -3,8 +3,9 @@
 
 <!-- Code -->
 <?php
-$basicForm = [];
-BasicFormController::handleSubmittedBasicForm();
+$basicFormController = new BasicFormController();
+$basicFormController->handleSubmittedBasicForm();
+$viewData = $basicFormController->getViewData();
 ?>
 
 <!-- View -->
@@ -32,26 +33,27 @@ BasicFormController::handleSubmittedBasicForm();
             </div>
             <form method="POST" enctype="multipart/form-data">
               <div class="card-body">
+                <p>Inputs are not validated</p>
                 <!-- Email Text Input -->
                 <div class="form-group">
                   <label for="email">Email address</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
                 </div>
                 <!-- Password Password Input-->
                 <div class="form-group">
                   <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                 </div>
                 <!-- Jojo Lore Textarea Input -->
                 <div class="form-group">
-                  <label>Jojo no Kimyo na Boken</label>
-                  <textarea class="form-control" rows="3" placeholder="Enter the lore" required></textarea>
+                  <label for="lore">Jojo no Kimyo na Boken</label>
+                  <textarea class="form-control" rows="3" placeholder="Enter the lore" id="lore" name="lore"></textarea>
                 </div>
                 <!-- File Input -->
                 <div class="form-group">
                   <label for="file">File input</label>
                   <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="file" name="file" required>
+                    <input type="file" class="custom-file-input" id="file" name="file">
                     <label class="custom-file-label" for="file">Choose file</label>
                   </div>
                 </div>
@@ -90,10 +92,11 @@ BasicFormController::handleSubmittedBasicForm();
               </div>
               <div class="card-footer">
                 <button type="submit" name="submitBasicForm" class="btn btn-primary">Submit</button>
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
-                  Launch Modal
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default" <?= $viewData["basicForm"]["wasSubmitted"] ? null : "disabled"; ?>>
+                  View submitted data
                 </button>
               </div>
+              <!-- <? print_r($viewData["basicForm"]["values"]); ?> -->
             </form>
           </div>
         </div>
@@ -113,11 +116,10 @@ BasicFormController::handleSubmittedBasicForm();
             </button>
           </div>
           <div class="modal-body">
-            <?php if (isset($basicForm["values"])) : ?>
-              <?php foreach ($basicForm["values"] as $key => $value) : ?>
-                <p><?= $key ?>: <?= $value ?></p>
-              <?php endforeach; ?>
-            <?php endif; ?>
+            <?php foreach ($viewData["basicForm"]["values"] as $key => $value) : ?>
+              <p><?= ucfirst($key) ?>: <?= $value ?></p>
+            <?php endforeach; ?>
+
           </div>
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -131,17 +133,17 @@ BasicFormController::handleSubmittedBasicForm();
   <script src="/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
   <script src="/adminlte/plugins/toastr/toastr.min.js"></script>
   <script src="/adminlte/lib/string-utils.js"></script>
-  <!-- Script for config file inputs -->
+  <!-- Script to config file inputs -->
   <script>
     $(function() {
       bsCustomFileInput.init();
     });
   </script>
   <!-- Send script conditionally -->
-  <?php if (isset($basicForm["values"]) && boolval($basicForm["values"])) : ?>
+  <?php if ($viewData["basicForm"]["values"] && $viewData["basicForm"]["wasSubmitted"]) : ?>
     <script>
       $('#modal-default').modal("show");
-      toastr.info("Toast");
+      toastr.info("Data sent to server");
     </script>
   <?php endif; ?>
 </body>

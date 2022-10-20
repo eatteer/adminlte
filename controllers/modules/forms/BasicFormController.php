@@ -1,58 +1,66 @@
 <?php
 class BasicFormController
 {
-  static function handleSubmittedBasicForm()
+  private array $viewData = [];
+
+  public function __construct()
   {
-    // Make $basicForm associative array global to use
-    // in the view
-    global $basicForm;
+    $this->viewData = [
+      "basicForm" => [
+        "wasSubmitted" => false,
+        "values" => [
+          "email" => "",
+          "password" => "",
+          "fileName" => "",
+          "lore" => "",
+          "nestjs" => "",
+          "aspnetCore" => "",
+          "laravel" => "",
+          "language" => ""
+        ]
+      ]
+    ];
+  }
 
+  function getViewData()
+  {
+    return $this->viewData;
+  }
+
+  function handleSubmittedBasicForm()
+  {
+    // If form was not submitted then just render the page
     $wasSubmitted = isset($_POST["submitBasicForm"]);
-
-    // If Basic Form was not submitted then just render the page
+    $this->viewData["basicForm"]["wasSubmitted"] = $wasSubmitted;
     if (!$wasSubmitted) return;
 
-    /**
-     * Basic Form was submitted
-     */
-
-    // Destructure text inputs
-    // ["email" => $email, "password" => $password] = $_POST;
-
+    // Submitted form
     // Text inputs
     $email = $_POST["email"] ?? "";
     $password = $_POST["password"] ?? "";
-
+    // Textarea input
+    $lore = $_POST["lore"] ?? "";
+    // File input
+    $file = $_FILES['file'];
+    $fileName = $file["name"] ?? "";
     // Radio inputs
-    // Which language are you learning?
     $language = $_POST["language"] ?? "";
-
-    // Checkbox inputs
-    // Which backend frameworks do you know?
+    // Check inputs
     $nestjs = $_POST["nestjs"] ?? "false";
     $aspnetCore = $_POST["aspnetCore"] ?? "false";
     $laravel = $_POST["laravel"] ?? "false";
 
-    // File inputs
-    $file = $_FILES['file'];
-    [
-      'name' => $fileName,
-      'size' => $fileSize,
-      'tmp_name' => $fileTemporaryPath
-    ] = $file;
 
-    // ChromePhp::log($file);
-
-    $basicForm = [
-      "values" => [
-        "email" => $email,
-        "password" => $password,
-        "fileName" => $fileName,
-        "nestjs" => $nestjs,
-        "aspnetCore" => $aspnetCore,
-        "laravel" => $laravel,
-        "language" => $language
-      ],
+    // Set data for the view
+    $this->viewData["basicForm"]["values"] = [
+      "email" => $email,
+      "password" => $password,
+      "fileName" => $fileName,
+      "lore" => $lore,
+      "nestjs" => $nestjs,
+      "aspnetCore" => $aspnetCore,
+      "laravel" => $laravel,
+      "language" => $language
     ];
   }
 }
