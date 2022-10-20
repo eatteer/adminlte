@@ -4,7 +4,7 @@ class BasicFormController
   static function handleSubmittedBasicForm()
   {
     global $basicForm;
-    
+
     $wasSubmitted = isset($_POST["submitBasicForm"]);
 
     // If Quick Example Form was not submitted then just render the page
@@ -27,7 +27,7 @@ class BasicFormController
 
     // ChromePhp::log($file);
 
-    $check = isset($_POST["check"]) ? "true" : "false";
+    $check = $_POST["check"] ?? "false";
 
     $basicForm = [
       "values" => [
