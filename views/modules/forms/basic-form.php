@@ -95,6 +95,7 @@ BasicFormController::handleSubmittedBasicForm();
   <?php include "views/includes/required-scripts.php" ?>
   <script src="/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
   <script src="/adminlte/plugins/toastr/toastr.min.js"></script>
+  <script src="/adminlte/lib/string-utils.js"></script>
   <script>
     $(function() {
       bsCustomFileInput.init();
@@ -106,10 +107,8 @@ BasicFormController::handleSubmittedBasicForm();
       const basicFormValues = <?= $basicFormValues ?>;
       let message = "";
       for (const [key, value] of Object.entries(basicFormValues)) {
-        const upperFirstKeyLetter = key[0].toUpperCase();
-        const lowerRestOfKeyLetters = key.slice(1).toLowerCase();
-        const capitalizedKey = `${upperFirstKeyLetter}${lowerRestOfKeyLetters}`;
-        message += `${capitalizedKey}: ${value} - `;
+        const capitalizedKey = capitalize(key);
+        message += `(${capitalizedKey}: ${value})`;
       }
       toastr.info(message);
     </script>
