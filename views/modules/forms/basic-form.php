@@ -100,12 +100,20 @@ BasicFormController::handleSubmittedBasicForm();
       bsCustomFileInput.init();
     });
   </script>
-  <?php
-  if (boolval($basicForm["values"])) {
-    $basicFormValues = json_encode($basicForm["values"]);
-    echo "<script>toastr.info(JSON.stringify($basicFormValues))</script>";
-  }
-  ?>
+  <?php if (boolval($basicForm["values"])) : ?>
+    <script>
+      <?php $basicFormValues = json_encode($basicForm["values"]); ?>
+      const basicFormValues = <?= $basicFormValues ?>;
+      let message = "";
+      for (const [key, value] of Object.entries(basicFormValues)) {
+        const upperFirstKeyLetter = key[0].toUpperCase();
+        const lowerRestOfKeyLetters = key.slice(1).toLowerCase();
+        const capitalizedKey = `${upperFirstKeyLetter}${lowerRestOfKeyLetters}`;
+        message += `${capitalizedKey}: ${value} - `;
+      }
+      toastr.info(message);
+    </script>
+  <?php endif; ?>
 </body>
 
 </html>
