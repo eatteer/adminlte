@@ -1,3 +1,11 @@
+<?php include "controllers/modules/login/LoginController.php" ?>
+
+<?php
+$loginController = new LoginController();
+$loginController->handleLoginSubmission();
+$viewData = $loginController->getViewData();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,20 +22,49 @@
       <div class="card-header">
         <h2 class="card-title font-weight-bold">Login</h2>
       </div>
-      <form class="">
+      <form method="POST">
         <div class="card-body">
+          <!-- 
+            Email
+           -->
+          <?php
+          $email = $viewData["loginForm"]["values"]["email"];
+          $emailError = $viewData["loginForm"]["errors"]["email"];
+          $isEmailError = $emailError ? "is-invalid" : null;
+          ?>
           <div class="form-group">
-            <label for="">Email</label>
-            <input class="form-control" type="email" name="" id="" placeholder="Enter your email">
+            <label for="email">Email</label>
+            <input class="form-control <?= $isEmailError ?>" type="email" name="email" id="email" placeholder="Enter your email" value="<?= $email ?>">
+            <div class="invalid-feedback"><?= $emailError ?></div>
           </div>
+          <!-- 
+            Password
+           -->
+          <?php
+          $password = $viewData["loginForm"]["values"]["password"];
+          $passwordError = $viewData["loginForm"]["errors"]["password"];
+          $isPasswordError = $passwordError ? "is-invalid" : null;
+          ?>
           <div class="form-group">
-            <label for="">Password</label>
-            <input class="form-control" type="password" name="" id="" placeholder="Enter your email">
+            <label for="password">Password</label>
+            <input class="form-control <?= $isPasswordError ?>" type="password" name="password" id="password" placeholder="Enter your email" value="<?= $password ?>">
+            <div class="invalid-feedback"><?= $passwordError ?></div>
           </div>
+          <!-- 
+            Errors message
+           -->
+          <?php if ($viewData["loginForm"]["errorMessage"]) : ?>
+            <div class="font-weight-bold text-danger">
+              <?= $viewData["loginForm"]["errorMessage"]; ?>
+            </div>
+          <?php endif; ?>
+          <!-- 
+            Link to register
+           -->
           <a href="<?= DOMAIN . "/adminlte/register" ?>">Don't you have an account? Register</a>
         </div>
         <div class="card-footer">
-          <button class="btn btn-primary" type="submit">Login</button>
+          <button class="btn btn-primary" type="submit" name="login">Login</button>
         </div>
       </form>
 
