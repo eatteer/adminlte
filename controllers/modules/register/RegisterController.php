@@ -62,7 +62,8 @@ class RegisterController
     // Validate if user already exists
     $doesUserExists = RegisterModel::checkIfUserWithEmailExists($email);
     if ($doesUserExists) {
-      $this->viewData["registerForm"]["errorMessage"] = "User already exists";
+      // $this->viewData["registerForm"]["errorMessage"] = "Email already exists";
+      $this->viewData["registerForm"]["errors"]["email"] = "Email already exists";
       return;
     }
 
