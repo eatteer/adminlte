@@ -24,6 +24,9 @@ $viewData = $registerController->getViewData();
       </div>
       <form method="POST">
         <div class="card-body">
+          <!-- 
+            Email
+           -->
           <div class="form-group">
             <?php
             $email = $viewData["registerForm"]["values"]["email"];
@@ -34,6 +37,9 @@ $viewData = $registerController->getViewData();
             <input class="form-control <?= $isEmailError ?>" type="email" name="email" id="email" placeholder="Enter your email" value="<?= $email ?>">
             <div class="invalid-feedback"><?= $emailError ?></div>
           </div>
+          <!-- 
+            Password
+           -->
           <div class="form-group">
             <?php
             $password = $viewData["registerForm"]["values"]["password"];
@@ -44,7 +50,13 @@ $viewData = $registerController->getViewData();
             <input class="form-control <?= $isPasswordError ?>" type="password" name="password" id="password" placeholder="Enter your password" value="<?= $password ?>">
             <div class="invalid-feedback"><?= $passwordError ?></div>
           </div>
+          <!-- 
+            Link to login
+           -->
           <a href="<?= DOMAIN . "/adminlte/login" ?>">Do you have an account? Login</a>
+          <!-- 
+            Errors message
+           -->
           <?php if ($viewData["registerForm"]["errorMessage"]) : ?>
             <div class="font-weight-bold text-danger">
               <?= $viewData["registerForm"]["errorMessage"]; ?>
