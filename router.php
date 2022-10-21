@@ -1,6 +1,6 @@
 <?php
 
-$path = $_GET["path"] ?? "home";
+$path = $_GET["path"] ?? "login";
 // URN -> Uniform Resource Name
 // $urns = explode("/", $path);
 // $page = $urns[0];

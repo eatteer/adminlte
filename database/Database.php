@@ -8,14 +8,14 @@ class Database
 
   static function connect(): PDO
   {
-    try {
-      $host = self::$host;
-      $dbname = self::$dbname;
-      $dsn = "mysql:host=$host;dbname=$dbname";
-      $pdo = new PDO($dsn, self::$user, self::$password);
-      return $pdo;
-    } catch (PDOException  $exception) {
-      throw $exception;
-    }
+    // try {
+    $host = self::$host;
+    $dbname = self::$dbname;
+    $dsn = "mysql:host=$host;dbname=$dbname";
+    $pdo = new PDO($dsn, self::$user, self::$password);
+    return $pdo;
+    // } catch (PDOException  $exception) {
+    //   throw $exception;
+    // }
   }
 }

@@ -25,15 +25,33 @@ $viewData = $registerController->getViewData();
       <form method="POST">
         <div class="card-body">
           <div class="form-group">
+            <?php
+            $email = $viewData["registerForm"]["values"]["email"];
+            $emailError = $viewData["registerForm"]["errors"]["email"];
+            $isEmailError = $emailError ? "is-invalid" : null;
+            ?>
             <label for="email">Email</label>
-            <input class="form-control" type="email" name="email" id="email" placeholder="Enter your email">
+            <input class="form-control <?= $isEmailError ?>" type="email" name="email" id="email" placeholder="Enter your email" value="<?= $email ?>">
+            <div class="invalid-feedback"><?= $emailError ?></div>
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
-            <input class="form-control" type="password" name="password" id="password" placeholder="Enter your password">
+            <?php
+            $password = $viewData["registerForm"]["values"]["password"];
+            $passwordError = $viewData["registerForm"]["errors"]["password"];
+            $isPasswordError = $passwordError ? "is-invalid" : null;
+            ?>
+            <label for="passwor">Password</label>
+            <input class="form-control <?= $isPasswordError ?>" type="password" name="password" id="password" placeholder="Enter your password" value="<?= $password ?>">
+            <div class="invalid-feedback"><?= $passwordError ?></div>
           </div>
           <a href="<?= DOMAIN . "/adminlte/login" ?>">Do you have an account? Login</a>
+          <?php if ($viewData["registerForm"]["errorMessage"]) : ?>
+            <div class="font-weight-bold text-danger">
+              <?= $viewData["registerForm"]["errorMessage"]; ?>
+            </div>
+          <?php endif; ?>
         </div>
+
         <div class="card-footer">
           <button class="btn btn-primary" type="submit" name="register">Register</button>
         </div>

@@ -1,5 +1,4 @@
-<?php
-include "database/Database.php";
+<?php include "models/modules/register/RegisterModel.php";
 
 class RegisterController
 {
@@ -10,6 +9,7 @@ class RegisterController
     $this->viewData = [
       "registerForm" => [
         "wasSubmitted" => false,
+        "errorMessage" => "",
         "values" => [
           "email" => "",
           "password" => ""
@@ -34,7 +34,6 @@ class RegisterController
     if (!$wasSubmitted) return;
 
     // Validate form to set view data
-
     // Get submitted values
     $email = $_POST["email"];
     $password = $_POST["password"];
@@ -52,9 +51,37 @@ class RegisterController
       $this->viewData["registerForm"]["errors"]["password"] = "Password is required";
     }
 
+    // FORM HAS ERRORS
+    // Do not continue with the code below the foreach
+    // until the each value of the errors array is empty
+    $registerFormErrors = $this->viewData["registerForm"]["errors"];
+    foreach ($registerFormErrors as $key => $value) {
+      if (!empty($value)) return;
+    }
+
     // Validate if user already exists
+    $doesUserExists = RegisterModel::checkIfUserWithEmailExists($email);
+    if ($doesUserExists) {
+      $this->viewData["registerForm"]["errorMessage"] = "User already exists";
+      return;
+    }
 
-    // Register user in database
+    // Try to register user in database
+    $userData = [
+      "email" => $email,
+      "password" => $password
+    ];
 
+    $wasSuccess = RegisterModel::registerUser($userData);
+
+    // User could not be registered
+    if (!$wasSuccess) {
+      $this->viewData["registerForm"]["errorMessage"] = "Something went wrong";
+      return;
+    }
+
+    // User registered successfully
+    $redirectionPage = "login";
+    header("Location: $redirectionPage");
   }
 }
