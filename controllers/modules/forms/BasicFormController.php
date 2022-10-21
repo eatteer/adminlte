@@ -3,25 +3,25 @@ class BasicFormController
 {
   private array $viewData = [];
 
-  public function __construct()
-  {
-    $this->viewData = [
-      "basicForm" => [
-        "wasSubmitted" => false,
-        "values" => [
-          "email" => "",
-          "password" => "",
-          "lore" => "",
-          "fileName" => "",
-          "anime" => "",
-          "nestjs" => "",
-          "aspnetCore" => "",
-          "laravel" => "",
-          "language" => ""
-        ]
-      ]
-    ];
-  }
+  // public function __construct()
+  // {
+  //   $this->viewData = [
+  //     "basicForm" => [
+  //       "wasSubmitted" => false,
+  //       "values" => [
+  //         "email" => "",
+  //         "password" => "",
+  //         "lore" => "",
+  //         "fileName" => "",
+  //         "anime" => "",
+  //         "nestjs" => "",
+  //         "aspnetCore" => "",
+  //         "laravel" => "",
+  //         "language" => ""
+  //       ]
+  //     ]
+  //   ];
+  // }
 
   function getViewData()
   {

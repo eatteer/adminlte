@@ -7,6 +7,12 @@ $path = $_GET["path"] ?? "home";
 $page = $path;
 
 switch ($page) {
+  case 'login':
+    include "views/modules/login/index.php";
+    break;
+  case 'register':
+    include "views/modules/register/index.php";
+    break;
   case 'home':
     include "views/modules/home.php";
     break;
