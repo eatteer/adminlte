@@ -11,10 +11,14 @@ class RegisterController
         "wasSubmitted" => false,
         "errorMessage" => "",
         "values" => [
+          "name" => "",
+          "surname" => "",
           "email" => "",
           "password" => ""
         ],
         "errors" => [
+          "name" => "",
+          "surname" => "",
           "email" => "",
           "password" => ""
         ]
@@ -35,14 +39,26 @@ class RegisterController
 
     // Validate form to set view data
     // Get submitted values
+    $name = $_POST["name"];
+    $surname = $_POST["surname"];
     $email = $_POST["email"];
     $password = $_POST["password"];
 
     // Set form values
+    $this->viewData["registerForm"]["values"]["name"] = $name;
+    $this->viewData["registerForm"]["values"]["surname"] = $surname;
     $this->viewData["registerForm"]["values"]["email"] = $email;
     $this->viewData["registerForm"]["values"]["password"] = $password;
 
     // Set form errors
+    if (empty($name)) {
+      $this->viewData["registerForm"]["errors"]["name"] = "Name is required";
+    }
+
+    if (empty($surname)) {
+      $this->viewData["registerForm"]["errors"]["surname"] = "Surname is required";
+    }
+
     if (empty($email)) {
       $this->viewData["registerForm"]["errors"]["email"] = "Email is required";
     }
@@ -69,6 +85,8 @@ class RegisterController
 
     // Try to register user in database
     $userData = [
+      "name" => $name,
+      "surname" => $surname,
       "email" => $email,
       "password" => $password
     ];

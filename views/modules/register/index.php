@@ -25,6 +25,32 @@ $viewData = $registerController->getViewData();
       <form method="POST">
         <div class="card-body">
           <!-- 
+            Name
+           -->
+          <div class="form-group">
+            <?php
+            $name = $viewData["registerForm"]["values"]["name"];
+            $nameError = $viewData["registerForm"]["errors"]["name"];
+            $isNameError = $nameError ? "is-invalid" : null;
+            ?>
+            <label for="name">Name</label>
+            <input class="form-control <?= $isNameError ?>" type="text" name="name" id="name" placeholder="Enter your name" value="<?= $name ?>">
+            <div class="invalid-feedback"><?= $nameError ?></div>
+          </div>
+          <!-- 
+            Surname
+           -->
+          <div class="form-group">
+            <?php
+            $surname = $viewData["registerForm"]["values"]["surname"];
+            $surnameError = $viewData["registerForm"]["errors"]["surname"];
+            $isSurnameError = $surnameError ? "is-invalid" : null;
+            ?>
+            <label for="surname">Surname</label>
+            <input class="form-control <?= $isSurnameError ?>" type="text" name="surname" id="surname" placeholder="Enter your surname" value="<?= $surname ?>">
+            <div class="invalid-feedback"><?= $surnameError ?></div>
+          </div>
+          <!-- 
             Email
            -->
           <div class="form-group">
