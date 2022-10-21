@@ -1,25 +1,18 @@
 <?php
 class Database
 {
-  private string $host;
-  private string $dbname;
-  private string $user;
-  private string $password;
+  static private string $host = "localhost";
+  static private string $dbname = "adminlte";
+  static private string $user = "root";
+  static private string $password = "";
 
-  function __construct()
-  {
-    // Values can be ENV variables
-    $this->host = "localhost";
-    $this->dbname = "adminlte";
-    $this->user = "root";
-    $this->password = "";
-  }
-
-  function connect(): PDO
+  static function connect(): PDO
   {
     try {
-      $dsn = "mysql:host=$this->host;dbname=$this->dbname";
-      $pdo = new PDO($dsn, $this->user, $this->password);
+      $host = self::$host;
+      $dbname = self::$dbname;
+      $dsn = "mysql:host=$host;dbname=$dbname";
+      $pdo = new PDO($dsn, self::$user, self::$password);
       return $pdo;
     } catch (PDOException  $exception) {
       throw $exception;

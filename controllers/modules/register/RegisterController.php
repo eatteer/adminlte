@@ -1,4 +1,6 @@
 <?php
+include "database/Database.php";
+
 class RegisterController
 {
   private array $viewData = [];
@@ -53,5 +55,6 @@ class RegisterController
     // Validate if user already exists
 
     // Register user in database
+
   }
 }
