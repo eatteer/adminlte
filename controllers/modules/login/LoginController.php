@@ -65,6 +65,11 @@ class LoginController
     }
 
     $redirectionPage = "home";
+    session_start();
+    $_SESSION["isAuthenticated"] = true;
+    $_SESSION["userId"] = $user["id"];
+    $_SESSION["userName"] = $user["name"];
+    $_SESSION["userSurname"] = $user["surname"];
     header("Location: $redirectionPage");
   }
 }

@@ -1,3 +1,7 @@
+<!-- Imports -->
+<?php include "includes/verify-authentication.php"; ?>
+
+<!-- View -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,8 +19,8 @@
     <div class="content-wrapper">
       <div class="content">
         <div class="container-fluid pt-3">
-          <h1>Contact</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi ab fugiat accusamus consequuntur nam alias praesentium nostrum, voluptate, animi ea, dignissimos tenetur sed hic dolorum repellat aliquam neque illo distinctio?</p>
+          <h1>Home</h1>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi officiis numquam deleniti commodi distinctio ratione ducimus architecto libero odio ipsa nam nobis, unde blanditiis? Suscipit eum ab assumenda recusandae ipsam!</p>
         </div>
       </div>
     </div>

@@ -1,3 +1,6 @@
+<!-- Imports -->
+<?php include "includes/verify-authentication.php" ?>
+
 <!-- View -->
 <!DOCTYPE html>
 <html lang="en">

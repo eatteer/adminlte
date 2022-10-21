@@ -1,7 +1,8 @@
 <!-- Imports -->
+<?php include "includes/verify-authentication.php" ?>
 <?php include "controllers/modules/forms/BasicFormController.php" ?>
 
-<!-- Code -->
+<!-- Controller -->
 <?php
 $basicFormController = new BasicFormController();
 $basicFormController->handleSubmittedBasicForm();

@@ -21,5 +21,9 @@
         <i class="fas fa-th-large"></i>
       </a>
     </li>
+    <a class="btn btn-danger" href="<?= DOMAIN . "/adminlte/logout" ?>">
+      <i class="fas fa-sign-out-alt mr-1"></i>
+      Logout
+    </a>
   </ul>
 </nav>

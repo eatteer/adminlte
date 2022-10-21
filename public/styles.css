@@ -1,0 +1,10 @@
+.radial-background {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f6f9;
+  background-image: radial-gradient(#0049ff, transparent 1px),
+    radial-gradient(#0049ff, transparent 1px);
+  background-position: 0 0, 25px 25px;
+  background-size: 50px 50px;
+}
