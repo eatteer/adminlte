@@ -37,7 +37,7 @@ $viewData = $loginController->getViewData();
           <div class="invalid-feedback"><?= $emailError ?></div>
         </div>
         <!--  Password -->
-        <?php [$password, $passwordError, $passwordErrorClass] = InputInformation::generateInformation($viewData, "loginForm", "email"); ?>
+        <?php [$password, $passwordError, $passwordErrorClass] = InputInformation::generateInformation($viewData, "loginForm", "password"); ?>
         <div class="form-group">
           <label for="password">Password</label>
           <input class="form-control <?= $passwordErrorClass ?>" type="password" name="password" id="password" placeholder="Enter your password" value="<?= $password ?>">
