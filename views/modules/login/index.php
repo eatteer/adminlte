@@ -26,9 +26,7 @@ $viewData = $loginController->getViewData();
     </div>
     <form method="POST">
       <div class="card-body">
-        <!-- 
-            Email
-           -->
+        <!-- Email -->
         <?php
         $email = $viewData["loginForm"]["values"]["email"];
         $emailError = $viewData["loginForm"]["errors"]["email"];
@@ -39,9 +37,7 @@ $viewData = $loginController->getViewData();
           <input class="form-control <?= $isEmailError ?>" type="email" name="email" id="email" placeholder="Enter your email" value="<?= $email ?>">
           <div class="invalid-feedback"><?= $emailError ?></div>
         </div>
-        <!-- 
-            Password
-           -->
+        <!--  Password -->
         <?php
         $password = $viewData["loginForm"]["values"]["password"];
         $passwordError = $viewData["loginForm"]["errors"]["password"];
@@ -52,17 +48,7 @@ $viewData = $loginController->getViewData();
           <input class="form-control <?= $isPasswordError ?>" type="password" name="password" id="password" placeholder="Enter your password" value="<?= $password ?>">
           <div class="invalid-feedback"><?= $passwordError ?></div>
         </div>
-        <!-- 
-            Errors message
-           -->
-        <?php if ($viewData["loginForm"]["errorMessage"]) : ?>
-          <div class="font-weight-bold text-danger">
-            <?= $viewData["loginForm"]["errorMessage"]; ?>
-          </div>
-        <?php endif; ?>
-        <!-- 
-            Link to register
-           -->
+        <!--  Link to register -->
         <a href="<?= DOMAIN . "/adminlte/register" ?>">Don't you have an account? Register</a>
       </div>
       <div class="card-footer">
@@ -72,10 +58,28 @@ $viewData = $loginController->getViewData();
         </button>
       </div>
     </form>
-
-
   </div>
+  <!-- Error Toast | Start -->
+  <?php $errorMesage = $viewData["loginForm"]["errorMessage"] ?>
+  <?php if ($errorMesage) : ?>
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+      <div class="toast hide bg-danger" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast-header">
+          <strong class="mr-auto">Error</strong>
+          <!-- <small>11 mins ago</small> -->
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body"><?= $errorMesage ?></div>
+      </div>
+    </div>
+  <?php endif; ?>
+  <!-- Error Toast | End -->
   <?php include "views/includes/required-scripts.php" ?>
+  <script>
+    $('.toast').toast("show");
+  </script>
 </body>
 
 </html>
