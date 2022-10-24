@@ -12,6 +12,7 @@ class AccountSettingsController
     $this->viewData = [
       "basicInformationForm" => [
         "wasSubmitted" => false,
+        "informationSuccessfullyUpdated" => false,
         "errorMessage" => "",
         "values" => [
           "name" => $user["name"],
@@ -78,6 +79,21 @@ class AccountSettingsController
       if (!empty($value)) return;
     }
 
-    echo "<script>alert('No errors, user can be updated')</script>";
+    $userData = [
+      "name" => $name,
+      "surname" => $surname,
+      "email" => $email,
+      "password" => $password
+    ];
+
+    $userId = $_SESSION["userId"];
+    $wasSuccess = UserModel::update($userId, $userData);
+
+    if (!$wasSuccess) {
+      $this->viewData["basicInformationForm"]["errorMessage"] = "Something went wrong";
+      return;
+    }
+
+    $this->viewData["basicInformationForm"]["informationSuccessfullyUpdated"] = true;
   }
 }

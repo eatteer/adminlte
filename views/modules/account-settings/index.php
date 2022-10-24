@@ -24,6 +24,7 @@ $viewData = $accountSettingController->getViewData();
 </head>
 
 <body class="hold-transition sidebar-mini">
+  <!-- Wrapper | Start -->
   <div class="wrapper">
     <?php include "views/components/navbar.php" ?>
     <?php include "views/components/aside.php" ?>
@@ -123,7 +124,7 @@ $viewData = $accountSettingController->getViewData();
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <input type="submit" class="btn btn-primary" name="updateBasicInformation" value="Update information">
+                      <input type="submit" class="btn btn-primary" name="updateBasicInformation" value="Accept">
                     </div>
                   </div>
                 </div>
@@ -138,7 +139,29 @@ $viewData = $accountSettingController->getViewData();
     <?php include "views/components/control-sidebar.php" ?>
     <?php include "views/components/footer.php" ?>
   </div>
+  <!-- Wrapper | End -->
+  <!-- Notification Toast | Start -->
+  <?php if ($viewData["basicInformationForm"]["informationSuccessfullyUpdated"]) : ?>
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+      <div class="toast hide bg-success" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast-header">
+          <strong class="mr-auto">Nofitication</strong>
+          <!-- <small>11 mins ago</small> -->
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">
+          Basic information was updated successfully
+        </div>
+      </div>
+    </div>
+  <?php endif; ?>
+  <!-- Notification Toast | End -->
   <?php include "views/includes/required-scripts.php" ?>
+  <script>
+    $('.toast').toast("show");
+  </script>
 </body>
 
 </html>
