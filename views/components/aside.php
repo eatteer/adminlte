@@ -56,7 +56,7 @@ $userSurname = $_SESSION["userSurname"];
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="/adminlte/forms" class="nav-link">
             <i class="nav-icon fas fa-clipboard-check"></i>
             <p>
               Forms
@@ -82,10 +82,7 @@ $userSurname = $_SESSION["userSurname"];
         <li class="nav-item">
           <a href="<?= DOMAIN . "/adminlte/contact" ?>" class="nav-link">
             <i class="nav-icon fas fa-phone"></i>
-            <p>
-              Contact
-              <span class="right badge badge-danger">New</span>
-            </p>
+            <p>Contact</p>
           </a>
         </li>
       </ul>

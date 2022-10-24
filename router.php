@@ -34,3 +34,21 @@ switch ($page) {
     echo "Provisional 404";
     break;
 }
+?>
+
+<script>
+  const url = window.location;
+  const allLinks = document.querySelectorAll('.nav-item a');
+  const currentLinks = [...allLinks].filter(e => url.href.includes(e.href));
+
+  currentLinks.forEach(currentLink => {
+    currentLink.classList.add("active");
+    // {currentLink} -> a
+    // {currentLink.parentElement} -> li
+    if (currentLink.parentElement.querySelector("ul")) {
+      currentLink.parentElement.classList.add("menu-is-opening");
+      currentLink.parentElement.classList.add("menu-open");
+      currentLink.parentElement.querySelector("ul").style.display = "block";
+    }
+  })
+</script>
