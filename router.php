@@ -45,7 +45,7 @@ switch ($page) {
     currentLink.classList.add("active");
     // {currentLink} -> a
     // {currentLink.parentElement} -> li
-    if (currentLink.parentElement.querySelector("ul")) {
+    if (currentLink.parentElement.querySelector(".nav-treeview")) {
       currentLink.parentElement.classList.add("menu-is-opening");
       currentLink.parentElement.classList.add("menu-open");
       currentLink.parentElement.querySelector("ul").style.display = "block";
