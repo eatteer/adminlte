@@ -6,28 +6,28 @@ $path = $_GET["path"] ?? "login";
 $page = $path;
 
 switch ($page) {
-  case 'login':
+  case "login":
     include "views/modules/login/index.php";
     break;
-  case 'logout':
+  case "logout":
     include "views/modules/logout/index.php";
     break;
-  case 'register':
+  case "register":
     include "views/modules/register/index.php";
     break;
-  case 'home':
+  case "home":
     include "views/modules/home/index.php";
     break;
-  case 'account-settings':
+  case "account-settings":
     include "views/modules/account-settings/index.php";
     break;
-  case 'forms/basic-form':
+  case "forms/basic-form":
     include "views/modules/forms/basic-form.php";
     break;
-  case 'forms/advanced-form':
+  case "forms/advanced-form":
     include "views/modules/forms/advanced-form.php";
     break;
-  case 'contact':
+  case "contact":
     include "views/modules/contact/index.php";
     break;
   default:
