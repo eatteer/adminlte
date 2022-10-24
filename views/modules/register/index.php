@@ -1,5 +1,8 @@
 <!-- Imports -->
-<?php include "controllers/modules/register/RegisterController.php"; ?>
+<?php
+include "controllers/modules/register/RegisterController.php";
+include "lib/InputInformation.php";
+?>
 
 <!-- Controller -->
 <?php
@@ -26,65 +29,37 @@ $viewData = $registerController->getViewData();
     </div>
     <form method="POST">
       <div class="card-body">
-        <!-- 
-          Name
-         -->
+        <!-- Name -->
         <div class="form-group">
-          <?php
-          $name = $viewData["registerForm"]["values"]["name"];
-          $nameError = $viewData["registerForm"]["errors"]["name"];
-          $isNameError = $nameError ? "is-invalid" : null;
-          ?>
+          <?php [$name, $nameError, $nameErrorClass] = InputInformation::generateInformation($viewData, "registerForm", "name"); ?>
           <label for="name">Name</label>
-          <input class="form-control <?= $isNameError ?>" type="text" name="name" id="name" placeholder="Enter your name" value="<?= $name ?>">
+          <input class="form-control <?= $nameErrorClass ?>" type="text" name="name" id="name" placeholder="Enter your name" value="<?= $name ?>">
           <div class="invalid-feedback"><?= $nameError ?></div>
         </div>
-        <!-- 
-          Surname
-         -->
+        <!--  Surname -->
         <div class="form-group">
-          <?php
-          $surname = $viewData["registerForm"]["values"]["surname"];
-          $surnameError = $viewData["registerForm"]["errors"]["surname"];
-          $isSurnameError = $surnameError ? "is-invalid" : null;
-          ?>
+          <?php [$surname, $surnameError, $surnameErrorClass] = InputInformation::generateInformation($viewData, "registerForm", "surname"); ?>
           <label for="surname">Surname</label>
-          <input class="form-control <?= $isSurnameError ?>" type="text" name="surname" id="surname" placeholder="Enter your surname" value="<?= $surname ?>">
+          <input class="form-control <?= $surnameErrorClass ?>" type="text" name="surname" id="surname" placeholder="Enter your surname" value="<?= $surname ?>">
           <div class="invalid-feedback"><?= $surnameError ?></div>
         </div>
-        <!-- 
-          Email
-         -->
+        <!-- Email -->
         <div class="form-group">
-          <?php
-          $email = $viewData["registerForm"]["values"]["email"];
-          $emailError = $viewData["registerForm"]["errors"]["email"];
-          $isEmailError = $emailError ? "is-invalid" : null;
-          ?>
+          <?php [$email, $emailError, $emailErrorClass] = InputInformation::generateInformation($viewData, "registerForm", "email"); ?>
           <label for="email">Email</label>
-          <input class="form-control <?= $isEmailError ?>" type="email" name="email" id="email" placeholder="Enter your email" value="<?= $email ?>">
+          <input class="form-control <?= $emailErrorClass ?>" type="email" name="email" id="email" placeholder="Enter your email" value="<?= $email ?>">
           <div class="invalid-feedback"><?= $emailError ?></div>
         </div>
-        <!-- 
-          Password
-         -->
+        <!--  Password -->
         <div class="form-group">
-          <?php
-          $password = $viewData["registerForm"]["values"]["password"];
-          $passwordError = $viewData["registerForm"]["errors"]["password"];
-          $isPasswordError = $passwordError ? "is-invalid" : null;
-          ?>
+          <?php [$password, $passwordError, $passwordErrorClass] = InputInformation::generateInformation($viewData, "registerForm", "password"); ?>
           <label for="passwor">Password</label>
-          <input class="form-control <?= $isPasswordError ?>" type="password" name="password" id="password" placeholder="Enter your password" value="<?= $password ?>">
+          <input class="form-control <?= $passwordErrorClass ?>" type="password" name="password" id="password" placeholder="Enter your password" value="<?= $password ?>">
           <div class="invalid-feedback"><?= $passwordError ?></div>
         </div>
-        <!-- 
-          Link to login
-         -->
+        <!--  Link to login -->
         <a href="<?= DOMAIN . "/adminlte/login" ?>">Do you have an account? Login</a>
-        <!-- 
-          Errors message
-         -->
+        <!--  Errors message -->
         <?php if ($viewData["registerForm"]["errorMessage"]) : ?>
           <div class="font-weight-bold text-danger">
             <?= $viewData["registerForm"]["errorMessage"]; ?>

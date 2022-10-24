@@ -1,5 +1,8 @@
 <!-- Imports -->
-<?php include "controllers/modules/login/LoginController.php" ?>
+<?php
+include "controllers/modules/login/LoginController.php";
+include "lib/InputInformation.php";
+?>
 
 <!-- Controller -->
 <?php
@@ -27,25 +30,17 @@ $viewData = $loginController->getViewData();
     <form method="POST">
       <div class="card-body">
         <!-- Email -->
-        <?php
-        $email = $viewData["loginForm"]["values"]["email"];
-        $emailError = $viewData["loginForm"]["errors"]["email"];
-        $isEmailError = $emailError ? "is-invalid" : null;
-        ?>
+        <?php [$email, $emailError, $emailErrorClass] = InputInformation::generateInformation($viewData, "loginForm", "email"); ?>
         <div class="form-group">
           <label for="email">Email</label>
-          <input class="form-control <?= $isEmailError ?>" type="email" name="email" id="email" placeholder="Enter your email" value="<?= $email ?>">
+          <input class="form-control <?= $emailErrorClass ?>" type="email" name="email" id="email" placeholder="Enter your email" value="<?= $email ?>">
           <div class="invalid-feedback"><?= $emailError ?></div>
         </div>
         <!--  Password -->
-        <?php
-        $password = $viewData["loginForm"]["values"]["password"];
-        $passwordError = $viewData["loginForm"]["errors"]["password"];
-        $isPasswordError = $passwordError ? "is-invalid" : null;
-        ?>
+        <?php [$password, $passwordError, $passwordErrorClass] = InputInformation::generateInformation($viewData, "loginForm", "email"); ?>
         <div class="form-group">
           <label for="password">Password</label>
-          <input class="form-control <?= $isPasswordError ?>" type="password" name="password" id="password" placeholder="Enter your password" value="<?= $password ?>">
+          <input class="form-control <?= $passwordErrorClass ?>" type="password" name="password" id="password" placeholder="Enter your password" value="<?= $password ?>">
           <div class="invalid-feedback"><?= $passwordError ?></div>
         </div>
         <!--  Link to register -->
