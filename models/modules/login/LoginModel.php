@@ -3,7 +3,7 @@ include "database/Database.php";
 
 class LoginModel
 {
-  static function findUserByEmail(string $email): mixed
+  static function findUserByEmail(string $email): array
   {
     $pdo = Database::connect();
     $query = "SELECT * FROM users WHERE email = :email";
