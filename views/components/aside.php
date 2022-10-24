@@ -37,7 +37,7 @@
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="<?= DOMAIN . "/adminlte/home" ?>" class="nav-link">
+          <a href="<?= DOMAIN . "/adminlte/home" ?>" class="nav-link" onclick="handleNavigation(event)">
             <i class="nav-icon fas fa-home"></i>
             <p>
               Home
@@ -45,7 +45,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?= DOMAIN . "/adminlte/account-settings" ?>" class="nav-link">
+          <a href="<?= DOMAIN . "/adminlte/account-settings" ?>" class="nav-link" onclick="handleNavigation()">
             <i class="nav-icon fas fa-user-cog"></i>
             <p>
               Account settings
@@ -53,7 +53,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link active">
+          <a href="#" class="nav-link">
             <i class="nav-icon fas fa-clipboard-check"></i>
             <p>
               Forms
@@ -62,7 +62,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= DOMAIN . "/adminlte/forms/basic-form" ?>" class="nav-link active">
+              <a href="<?= DOMAIN . "/adminlte/forms/basic-form" ?>" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Basic Form</p>
               </a>
