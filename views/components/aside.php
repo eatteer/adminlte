@@ -3,7 +3,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="" class="brand-link">
-    <img src="/adminlte/dist/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="/adminlte/dist/img/logo.webp" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">AdminLTE</span>
   </a>
 
@@ -12,7 +12,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="/adminlte/dist/img/dio.jpg" class="img-circle elevation-2" alt="User Image">
+        <img src="/adminlte/dist/img/giorno.jpg" class="img-circle elevation-2" alt="User Image" style="aspect-ratio: 1/1; width: 34px; height: 34px; object-fit: cover;">
       </div>
       <div class="info">
         <a href="" class="d-block"><?= $userName ?></a>
@@ -41,6 +41,14 @@
             <i class="nav-icon fas fa-home"></i>
             <p>
               Home
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="<?= DOMAIN . "/adminlte/account-settings" ?>" class="nav-link">
+            <i class="nav-icon fas fa-user-cog"></i>
+            <p>
+              Account settings
             </p>
           </a>
         </li>

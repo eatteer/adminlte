@@ -20,7 +20,7 @@ $viewData = $registerController->getViewData();
 </head>
 
 <body class="radial-background">
-  <div class="card mx-auto mt-5" style="max-width: 320px;">
+  <div class="card mx-auto mt-5" style="max-width: 420px;">
     <div class="card-header">
       <h2 class="card-title font-weight-bold">Register</h2>
     </div>

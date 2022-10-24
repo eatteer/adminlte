@@ -1,5 +1,6 @@
 <?php
 include "models/modules/login/LoginModel.php";
+require_once "models/entities/UserModel.php";
 
 class LoginController
 {
@@ -56,7 +57,7 @@ class LoginController
     if (!empty(implode($this->viewData["loginForm"]["errors"]))) return;
 
     // Try to login user
-    $user = LoginModel::findUserByEmail($email);
+    $user = UserModel::findUserByEmail($email);
 
     // User does not exist or passwords do not match
     if (!$user || $password != $user["password"]) {

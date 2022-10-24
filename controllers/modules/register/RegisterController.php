@@ -1,4 +1,6 @@
-<?php include "models/modules/register/RegisterModel.php";
+<?php
+include "models/modules/register/RegisterModel.php";
+include "models/entities/UserModel.php";
 
 class RegisterController
 {
@@ -76,8 +78,8 @@ class RegisterController
     }
 
     // Validate if user already exists
-    $doesUserExists = RegisterModel::checkIfUserWithEmailExists($email);
-    if ($doesUserExists) {
+    $user = UserModel::findUserByEmail($email);
+    if ($user) {
       // $this->viewData["registerForm"]["errorMessage"] = "Email already exists";
       $this->viewData["registerForm"]["errors"]["email"] = "Email already exists";
       return;
@@ -91,7 +93,7 @@ class RegisterController
       "password" => $password
     ];
 
-    $wasSuccess = RegisterModel::registerUser($userData);
+    $wasSuccess = UserModel::create($userData);
 
     // User could not be registered
     if (!$wasSuccess) {
