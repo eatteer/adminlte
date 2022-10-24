@@ -130,30 +130,6 @@ $viewData = $accountSettingController->getViewData();
                 </div>
               </div>
               <!-- Confirmation Modal | End -->
-              <!-- Error Modal | Start -->
-              <?php $errorMesage = $viewData["basicInformationForm"]["errorMessage"] ?>
-              <?php if ($errorMesage) : ?>
-                <div class="modal fade" id="confirmationModal" tabindex="-1" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Update confirmation</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <?= $errorMesage ?>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary" name="updateBasicInformation" value="Accept">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <?php endif; ?>
-              <!-- Error Modal | End -->
             </form>
           </div>
         </div>
@@ -182,6 +158,23 @@ $viewData = $accountSettingController->getViewData();
     </div>
   <?php endif; ?>
   <!-- Notification Toast | End -->
+  <!-- Error Toast | Start -->
+  <?php $errorMesage = $viewData["basicInformationForm"]["errorMessage"] ?>
+  <?php if ($errorMesage) : ?>
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+      <div class="toast hide bg-success" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+        <div class="toast-header">
+          <strong class="mr-auto">Error</strong>
+          <!-- <small>11 mins ago</small> -->
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">$errorMesage</div>
+      </div>
+    </div>
+  <?php endif; ?>
+  <!-- Error Toast | End -->
   <?php include "views/includes/required-scripts.php" ?>
   <script>
     $('.toast').toast("show");

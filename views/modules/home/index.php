@@ -13,6 +13,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
+  <!-- Wrapper | Start -->
   <div class="wrapper">
     <?php include "views/components/navbar.php" ?>
     <?php include "views/components/aside.php" ?>
@@ -44,6 +45,7 @@
     <?php include "views/components/control-sidebar.php" ?>
     <?php include "views/components/footer.php" ?>
   </div>
+  <!-- Wrapper | End -->
   <?php include "views/includes/required-scripts.php" ?>
 </body>
 
