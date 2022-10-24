@@ -18,6 +18,9 @@ switch ($page) {
   case 'home':
     include "views/modules/home/index.php";
     break;
+  case 'account-settings':
+    include "views/modules/account-settings/index.php";
+    break;
   case 'forms/basic-form':
     include "views/modules/forms/basic-form.php";
     break;
