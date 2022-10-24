@@ -18,7 +18,9 @@ $userSurname = $_SESSION["userSurname"];
         <img src="/adminlte/dist/img/giorno.jpg" class="img-circle elevation-2" alt="User Image" style="aspect-ratio: 1/1; width: 34px; height: 34px; object-fit: cover;">
       </div>
       <div class="info">
-        <a href="" class="d-block text-truncate"><?= "$userName $userSurname"; ?></a>
+        <?php [$userFirstName] = explode(" ", $userName); ?>
+        <?php [$userFirstLastName] = explode(" ", $userSurname); ?>
+        <a href="" class="d-block text-truncate"><?= "$userFirstName $userFirstLastName"; ?></a>
       </div>
     </div>
 
