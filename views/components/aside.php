@@ -1,4 +1,7 @@
-<?php $userName = $_SESSION["userName"]; ?>
+<?php
+$userName = $_SESSION["userName"];
+$userSurname = $_SESSION["userSurname"];
+?>
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
@@ -15,7 +18,7 @@
         <img src="/adminlte/dist/img/giorno.jpg" class="img-circle elevation-2" alt="User Image" style="aspect-ratio: 1/1; width: 34px; height: 34px; object-fit: cover;">
       </div>
       <div class="info">
-        <a href="" class="d-block"><?= $userName ?></a>
+        <a href="" class="d-block"><?= "$userName $userSurname"; ?></a>
       </div>
     </div>
 
