@@ -7,6 +7,11 @@ class AccountSettingsController
 
   function __construct()
   {
+    /**
+     * Get the id of the authenticated user
+     * to find him in the database and initializate the form
+     * with his data
+     */
     $userId = $_SESSION["userId"];
     $user = UserModel::findById($userId);
     $this->viewData = [
@@ -39,6 +44,10 @@ class AccountSettingsController
   {
     $wasSubmitted = isset($_POST["updateBasicInformation"]);
     $this->viewData["basicInformationForm"]["wasSubmitted"] = $wasSubmitted;
+
+    /**
+     * If the form was not submitted just render the page
+     */
     if (!$wasSubmitted) return;
 
     // Validate form to set view data
@@ -79,21 +88,30 @@ class AccountSettingsController
       if (!empty($value)) return;
     }
 
+    /**
+     * Update the user data with the submitted data
+     */
     $userData = [
       "name" => $name,
       "surname" => $surname,
       "email" => $email,
       "password" => $password
     ];
-
     $userId = $_SESSION["userId"];
     $wasSuccess = UserModel::update($userId, $userData);
 
+    /**
+     * In case an error occurs, set an error message
+     */
     if (!$wasSuccess) {
       $this->viewData["basicInformationForm"]["errorMessage"] = "Something went wrong";
       return;
     }
 
+    /**
+     * If the user information update could be done, set {informationSuccessfullyUpdated}
+     * to true to display a toast on the view
+     */
     $this->viewData["basicInformationForm"]["informationSuccessfullyUpdated"] = true;
   }
 }

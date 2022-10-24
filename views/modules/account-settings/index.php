@@ -141,7 +141,8 @@ $viewData = $accountSettingController->getViewData();
   </div>
   <!-- Wrapper | End -->
   <!-- Notification Toast | Start -->
-  <?php if ($viewData["basicInformationForm"]["informationSuccessfullyUpdated"]) : ?>
+  <?php $informationSuccessfullyUpdated = $viewData["basicInformationForm"]["informationSuccessfullyUpdated"] ?>
+  <?php if ($informationSuccessfullyUpdated) : ?>
     <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
       <div class="toast hide bg-success" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
         <div class="toast-header">
