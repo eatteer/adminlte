@@ -130,6 +130,30 @@ $viewData = $accountSettingController->getViewData();
                 </div>
               </div>
               <!-- Confirmation Modal | End -->
+              <!-- Error Modal | Start -->
+              <?php $errorMesage = $viewData["basicInformationForm"]["errorMessage"] ?>
+              <?php if ($errorMesage) : ?>
+                <div class="modal fade" id="confirmationModal" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Update confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <?= $errorMesage ?>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" name="updateBasicInformation" value="Accept">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <?php endif; ?>
+              <!-- Error Modal | End -->
             </form>
           </div>
         </div>
