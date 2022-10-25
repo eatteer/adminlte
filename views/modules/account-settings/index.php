@@ -183,9 +183,8 @@ $viewData = $accountSettingController->getViewData();
         <!-- Delete account section | Start -->
         <section>
           <h2 class="text-danger">Delete account</h2>
-          <p>
-            Once you delete your account, there is no going back. Please be certain.
-          </p>
+          <p>Once you delete your account, there is no going back. Please be certain.</p>
+          <p>I'm kidding, you will only be inactive.</p>
           <button
             class="btn btn-outline-danger"
             href=""
