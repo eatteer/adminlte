@@ -47,10 +47,7 @@ class RegisterController
     $password = $_POST["password"];
 
     // Set form values
-    $this->viewData["registerForm"]["values"]["name"] = $name;
-    $this->viewData["registerForm"]["values"]["surname"] = $surname;
-    $this->viewData["registerForm"]["values"]["email"] = $email;
-    $this->viewData["registerForm"]["values"]["password"] = $password;
+    $this->viewData["registerForm"]["values"] = $_POST;
 
     // Set form errors
     if (empty($name)) {
