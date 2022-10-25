@@ -6,7 +6,7 @@ use Rakit\Validation\Validator;
 
 class AccountSettingsController
 {
-  private array $viewData = [];
+  private array $viewData;
   private Validator $validator;
 
   function __construct()
@@ -102,7 +102,7 @@ class AccountSettingsController
     // Do not continue with the code below the foreach
     // until the value of the errors array is empty
     $registerFormErrors = $this->viewData["basicInformationForm"]["errors"];
-    foreach ($registerFormErrors as $key => $value) {
+    foreach ($registerFormErrors as $value) {
       if (!empty($value)) return;
     }
 
