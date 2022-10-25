@@ -1,8 +1,14 @@
+<!-- Imports -->
+<?php require_once "controllers/components/AsideController.php"; ?>
+
+<!-- Controller -->
 <?php
-$userName = $_SESSION["userName"];
-$userSurname = $_SESSION["userSurname"];
+$asideController = new AsideController();
+$asideController->handleOnRender();
+$asideComponentData = $asideController->getViewData();
 ?>
 
+<!-- View -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="" class="brand-link">
@@ -19,8 +25,8 @@ $userSurname = $_SESSION["userSurname"];
              style="aspect-ratio: 1/1; width: 34px; height: 34px; object-fit: cover;">
       </div>
       <div class="info">
-        <?php [$userFirstName] = explode(" ", $userName); ?>
-        <?php [$userFirstLastName] = explode(" ", $userSurname); ?>
+        <?php [$userFirstName] = explode(" ", $asideComponentData["user"]["name"]); ?>
+        <?php [$userFirstLastName] = explode(" ", $asideComponentData["user"]["surname"]); ?>
         <a href="" class="d-block text-truncate"><?= "$userFirstName $userFirstLastName"; ?></a>
       </div>
     </div>
