@@ -1,4 +1,5 @@
 <?php
+
 class Database
 {
   static private string $host = "localhost";
@@ -11,7 +12,9 @@ class Database
     $host = self::$host;
     $dbname = self::$dbname;
     $dsn = "mysql:host=$host;dbname=$dbname";
-    $pdo = new PDO($dsn, self::$user, self::$password);
+    $pdo = new PDO($dsn, self::$user, self::$password, array(
+      PDO::ATTR_PERSISTENT => true
+    ));
     return $pdo;
   }
 }
