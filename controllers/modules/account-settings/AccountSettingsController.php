@@ -76,26 +76,31 @@ class AccountSettingsController
     /* Validate if user already exists */
     ["email" => $submittedEmail] = $_POST;
 
-    $user = UserModel::findByEmail($submittedEmail);
-
-    if ($user) {
-      $this->viewData["basicInformationForm"]["errors"]["email"] = "The Email already exists";
-      return;
-    }
-
-    /* Try to update user data */
     $userId = $_SESSION["userId"];
-    $wasSuccess = UserModel::update($userId, $_POST);
 
-    /* In case an error occurs, set an error message */
-    if (!$wasSuccess) {
-      $this->viewData["errorMessage"] = "Something went wrong";
+    $authenticatedUser = UserModel::findById($userId);
+    $foundUser = UserModel::findByEmail($submittedEmail);
+
+    /* 1. If the email does not exist then make the update
+    2. If the email exists and the authenticated user owns it then make the update */
+    if (!$foundUser || $authenticatedUser["email"] == $foundUser["email"]) {
+      /* Try to update user data */
+      $wasSuccess = UserModel::update($userId, $_POST);
+
+      /* In case an error occurs, set an error message */
+      if (!$wasSuccess) {
+        $this->viewData["errorMessage"] = "Something went wrong";
+        return;
+      }
+
+      /* If the user information update could be done, set {informationSuccessfullyUpdated}
+      to true to display a toast on the view */
+      $this->viewData["basicInformationForm"]["informationSuccessfullyUpdated"] = true;
       return;
     }
 
-    /* If the user information update could be done, set {informationSuccessfullyUpdated}
-    to true to display a toast on the view */
-    $this->viewData["basicInformationForm"]["informationSuccessfullyUpdated"] = true;
+    /* Email already exist and the authenticated user does not own it */
+    $this->viewData["basicInformationForm"]["errors"]["email"] = "The Email already exists";
   }
 
   function handleDeleteAccountSubmission()
