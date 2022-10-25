@@ -130,7 +130,7 @@ $viewData = $accountSettingController->getViewData();
                     <label for="email">Email</label>
                     <input
                       class="form-control <?= $emailErrorClass; ?>"
-                      type="text"
+                      type="email"
                       id="email"
                       name="email"
                       value="<?= $email; ?>">

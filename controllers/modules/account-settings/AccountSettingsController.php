@@ -61,7 +61,7 @@ class AccountSettingsController
     $validation = $this->validator->validate($_POST, [
       "name" => "required",
       "surname" => "required",
-      "email" => "required",
+      "email" => "required|email",
       "password" => "required"
     ]);
 
