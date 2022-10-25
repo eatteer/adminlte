@@ -1,5 +1,6 @@
 <?php
-include "ChromePhp.php";
+require_once "ChromePhp.php";
+require("vendor/autoload.php");
 
 $serverName = $_SERVER["SERVER_NAME"];
 $isHttps = isset($_SERVER["HTTPS"]);

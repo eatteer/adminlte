@@ -1,13 +1,13 @@
 <?php
-include "models/entities/UserModel.php";
-require("vendor/autoload.php");
+require_once "controllers/modules/logout/LogoutController.php";
+require_once "models/entities/UserModel.php";
 
 use Rakit\Validation\Validator;
 
 class AccountSettingsController
 {
-  private array $viewData;
   private Validator $validator;
+  private array $viewData;
 
   function __construct()
   {
@@ -16,11 +16,12 @@ class AccountSettingsController
     and initialize the form with his data */
     $userId = $_SESSION["userId"];
     $user = UserModel::findById($userId);
+    /* Initialize view data */
     $this->viewData = [
+      "errorMessage" => "",
       "basicInformationForm" => [
         "wasSubmitted" => false,
         "informationSuccessfullyUpdated" => false,
-        "errorMessage" => "",
         "values" => [
           "name" => $user["name"],
           "surname" => $user["surname"],
@@ -33,6 +34,9 @@ class AccountSettingsController
           "email" => "",
           "password" => ""
         ]
+      ],
+      "deleteAccountForm" => [
+        "wasSubmitted" => false
       ]
     ];
   }
@@ -69,18 +73,50 @@ class AccountSettingsController
       return;
     }
 
+    /* Validate if user already exists */
+    ["email" => $submittedEmail] = $_POST;
+
+    $user = UserModel::findByEmail($submittedEmail);
+
+    if ($user) {
+      $this->viewData["basicInformationForm"]["errors"]["email"] = "The Email already exists";
+      return;
+    }
+
     /* Try to update user data */
     $userId = $_SESSION["userId"];
     $wasSuccess = UserModel::update($userId, $_POST);
 
     /* In case an error occurs, set an error message */
     if (!$wasSuccess) {
-      $this->viewData["basicInformationForm"]["errorMessage"] = "Something went wrong";
+      $this->viewData["errorMessage"] = "Something went wrong";
       return;
     }
 
     /* If the user information update could be done, set {informationSuccessfullyUpdated}
     to true to display a toast on the view */
     $this->viewData["basicInformationForm"]["informationSuccessfullyUpdated"] = true;
+  }
+
+  function handleDeleteAccountSubmission()
+  {
+    $wasSubmitted = isset($_POST["deleteAccount"]);
+    $this->viewData["deleteAccountForm"]["wasSubmitted"] = $wasSubmitted;
+
+    /* If the form was not submitted just render the page */
+    if (!$wasSubmitted) return;
+
+    /* Try to delete user from database */
+    $userId = $_SESSION["userId"];
+    $wasSuccess = UserModel::softDelete($userId);
+
+    /* In case an error occurs, set an error message */
+    if (!$wasSuccess) {
+      $this->viewData["errorMessage"] = "Something went wrong";
+      return;
+    }
+
+    $redirectionPage = "logout";
+    header("Location: $redirectionPage");
   }
 }

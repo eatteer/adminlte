@@ -21,12 +21,6 @@ switch ($page) {
   case "account-settings":
     include "views/modules/account-settings/index.php";
     break;
-  case "forms/basic-form":
-    include "views/modules/forms/basic-form.php";
-    break;
-  case "forms/advanced-form":
-    include "views/modules/forms/advanced-form.php";
-    break;
   case "contact":
     include "views/modules/contact/index.php";
     break;

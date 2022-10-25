@@ -1,13 +1,18 @@
 <?php
-include "models/modules/register/RegisterModel.php";
-include "models/entities/UserModel.php";
+require_once "models/modules/register/RegisterModel.php";
+require_once "models/entities/UserModel.php";
+
+use Rakit\Validation\Validator;
 
 class RegisterController
 {
-  private array $viewData = [];
+  private Validator $validator;
+  private array $viewData;
 
   function __construct()
   {
+    $this->validator = new Validator;
+    /* Initialize view data */
     $this->viewData = [
       "registerForm" => [
         "wasSubmitted" => false,
@@ -28,7 +33,7 @@ class RegisterController
     ];
   }
 
-  function getViewData()
+  function getViewData(): array
   {
     return $this->viewData;
   }
@@ -37,68 +42,48 @@ class RegisterController
   {
     $wasSubmitted = isset($_POST["register"]);
     $this->viewData["registerForm"]["wasSubmitted"] = $wasSubmitted;
+
+    /* If the form was not submitted just render the page */
     if (!$wasSubmitted) return;
 
-    // Validate form to set view data
-    // Get submitted values
-    $name = $_POST["name"];
-    $surname = $_POST["surname"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-
-    // Set form values
+    /* Set form values with submitted values */
     $this->viewData["registerForm"]["values"] = $_POST;
 
-    // Set form errors
-    if (empty($name)) {
-      $this->viewData["registerForm"]["errors"]["name"] = "Name is required";
-    }
+    /* Validate submitted values */
+    $validation = $this->validator->validate($_POST, [
+      "name" => "required",
+      "surname" => "required",
+      "email" => "required|email",
+      "password" => "required"
+    ]);
 
-    if (empty($surname)) {
-      $this->viewData["registerForm"]["errors"]["surname"] = "Surname is required";
-    }
-
-    if (empty($email)) {
-      $this->viewData["registerForm"]["errors"]["email"] = "Email is required";
-    }
-
-    if (empty($password)) {
-      $this->viewData["registerForm"]["errors"]["password"] = "Password is required";
-    }
-
-    // FORM HAS ERRORS
-    // Do not continue with the code below the foreach
-    // until the each value of the errors array is empty
-    $registerFormErrors = $this->viewData["registerForm"]["errors"];
-    foreach ($registerFormErrors as $key => $value) {
-      if (!empty($value)) return;
-    }
-
-    // Validate if user already exists
-    $user = UserModel::findUserByEmail($email);
-    if ($user) {
-      // $this->viewData["registerForm"]["errorMessage"] = "Email already exists";
-      $this->viewData["registerForm"]["errors"]["email"] = "Email already exists";
+    /* Set form errors */
+    if ($validation->fails()) {
+      $generatedErrors = $validation->errors()->firstOfAll();
+      $errors = $this->viewData["registerForm"]["errors"];
+      $this->viewData["registerForm"]["errors"] = array_merge($errors, $generatedErrors);
       return;
     }
 
-    // Try to register user in database
-    $userData = [
-      "name" => $name,
-      "surname" => $surname,
-      "email" => $email,
-      "password" => $password
-    ];
+    /* Validate if user already exists */
+    ["email" => $submittedEmail] = $_POST;
 
-    $wasSuccess = UserModel::create($userData);
+    $user = UserModel::findByEmail($submittedEmail);
+    if ($user) {
+      $this->viewData["registerForm"]["errors"]["email"] = "The Email already exists";
+      return;
+    }
 
-    // User could not be registered
+    /* Try to register user in database */
+    $wasSuccess = UserModel::create($_POST);
+
+    /* User could not be registered */
     if (!$wasSuccess) {
       $this->viewData["registerForm"]["errorMessage"] = "Something went wrong";
       return;
     }
 
-    // User registered successfully
+    /* User successfully registered and redirect to login page */
     $redirectionPage = "login";
     header("Location: $redirectionPage");
   }
