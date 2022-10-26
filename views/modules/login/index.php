@@ -1,5 +1,6 @@
 <!-- Imports -->
 <?php
+require_once "includes/home-redirection.php";
 require_once "controllers/modules/login/LoginController.php";
 require_once "lib/InputInformation.php";
 ?>
