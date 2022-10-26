@@ -63,9 +63,10 @@ class LoginController
     /* Try to log in user */
     ["email" => $submittedEmail, "password" => $submittedPassword] = $_POST;
     $user = UserModel::findActiveByEmail($submittedEmail);
+    $user && $passwordsMatch = password_verify($submittedPassword, $user["password"]);
 
     /* User does not exist or passwords do not match */
-    if (!$user || $submittedPassword != $user["password"]) {
+    if (!$user || !$passwordsMatch) {
       $this->viewData["loginForm"]["errorMessage"] = "Email or password does not match";
       return;
     }

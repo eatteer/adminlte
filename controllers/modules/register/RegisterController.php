@@ -75,7 +75,18 @@ class RegisterController
     }
 
     /* Try to register user in database */
-    $wasSuccess = UserModel::create($_POST);
+    $userData = [
+      "name" => $_POST["name"],
+      "surname" => $_POST["surname"],
+      "email" => $_POST["email"],
+      "password" => $_POST["password"]
+    ];
+
+    /* Hash password */
+    ChromePhp::log($userData["password"]);
+    $hashedPassword = password_hash($userData["password"], PASSWORD_DEFAULT);
+    $userData["password"] = $hashedPassword;
+    $wasSuccess = UserModel::create($userData);
 
     /* User could not be registered */
     if (!$wasSuccess) {
