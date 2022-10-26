@@ -25,14 +25,12 @@ class AccountSettingsController
         "values" => [
           "name" => $user["name"],
           "surname" => $user["surname"],
-          "email" => $user["email"],
-          "password" => $user["password"]
+          "email" => $user["email"]
         ],
         "errors" => [
           "name" => "",
           "surname" => "",
-          "email" => "",
-          "password" => ""
+          "email" => ""
         ]
       ],
       "deleteAccountForm" => [
@@ -62,7 +60,6 @@ class AccountSettingsController
       "name" => "required",
       "surname" => "required",
       "email" => "required|email",
-      "password" => "required"
     ]);
 
     /* Set form errors */

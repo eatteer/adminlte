@@ -111,7 +111,7 @@ $viewData = $accountSettingController->getViewData();
                 <!-- Surname | End -->
               </div>
               <!-- Name, Surname Row - End -->
-              <!-- Email, Password Row - Start -->
+              <!-- Email Row - Start -->
               <div class="row">
                 <!-- Email | Start -->
                 <?php
@@ -138,33 +138,8 @@ $viewData = $accountSettingController->getViewData();
                   </div>
                 </div>
                 <!-- Email | End -->
-                <!-- Password | Start -->
-                <?php
-                [
-                  $password,
-                  $passwordError,
-                  $passwordErrorClass
-                ] = InputInformation::generateInformation(
-                  $viewData,
-                  "basicInformationForm",
-                  "password"
-                );
-                ?>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="password">Password</label>
-                    <input
-                      class="form-control <?= $passwordErrorClass; ?>"
-                      type="password"
-                      id="password"
-                      name="password"
-                      value="<?= $password; ?>">
-                    <div class="invalid-feedback"><?= $passwordError; ?></div>
-                  </div>
-                </div>
-                <!-- Password | End -->
               </div>
-              <!-- Email, Password Row - End -->
+              <!-- Email Row - End -->
             </div>
             <!-- Card body | End -->
             <!-- Card footer | Start -->

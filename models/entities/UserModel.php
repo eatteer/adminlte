@@ -71,12 +71,11 @@ class UserModel
   static function update(string $userId, array $userData): bool
   {
     $pdo = Database::connect();
-    $query = "UPDATE users SET name = :name, surname = :surname, email = :email, password = :password WHERE id = :id";
+    $query = "UPDATE users SET name = :name, surname = :surname, email = :email WHERE id = :id";
     $statement = $pdo->prepare($query);
     $statement->bindParam("name", $userData["name"], PDO::PARAM_STR);
     $statement->bindParam("surname", $userData["surname"], PDO::PARAM_STR);
     $statement->bindParam("email", $userData["email"], PDO::PARAM_STR);
-    $statement->bindParam("password", $userData["password"], PDO::PARAM_STR);
     $statement->bindParam("id", $userId, PDO::PARAM_INT);
     $wasSuccess = $statement->execute();
     return $wasSuccess;
