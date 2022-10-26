@@ -24,13 +24,17 @@ $viewData = $loginController->getViewData();
 </head>
 
 <body class="radial-background">
+<!-- Card | Start -->
 <div class="card mx-auto mt-5" style="max-width: 420px;">
+  <!-- Card header | Start -->
   <div class="card-header">
     <h2 class="card-title font-weight-bold">Login</h2>
   </div>
+  <!-- Card header | End -->
   <form method="POST">
+    <!-- Card body | Start -->
     <div class="card-body">
-      <!-- Email -->
+      <!-- Email input | Start -->
       <?php
       [
         $email,
@@ -54,7 +58,8 @@ $viewData = $loginController->getViewData();
         >
         <div class="invalid-feedback"><?= $emailError; ?></div>
       </div>
-      <!--  Password -->
+      <!-- Email input | End -->
+      <!-- Password input | Start  -->
       <?php
       [
         $password,
@@ -78,18 +83,24 @@ $viewData = $loginController->getViewData();
         >
         <div class="invalid-feedback"><?= $passwordError; ?></div>
       </div>
-      <!--  Link to register -->
+      <!-- Password input | End -->
+      <!-- Link to register | Start -->
       <a href="<?= DOMAIN . "/adminlte/register" ?>">Don't you have an account? Register</a>
+      <!-- Link to register | End -->
     </div>
+    <!-- Card body | End -->
+    <!-- Card footer | Start -->
     <div class="card-footer">
       <button class="btn btn-primary" type="submit" name="login">
         <i class="fas fa-sign-in-alt mr-1"></i>
         Login
       </button>
     </div>
+    <!-- Card footer | End -->
   </form>
 </div>
-<!-- Error Toast | Start -->
+<!-- Card | End -->
+<!-- Error toast | Start -->
 <?php $errorMessage = $viewData["loginForm"]["errorMessage"]; ?>
 <?php if ($errorMessage) : ?>
   <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
@@ -104,10 +115,10 @@ $viewData = $loginController->getViewData();
     </div>
   </div>
 <?php endif; ?>
-<!-- Error Toast | End -->
+<!-- Error toast | End -->
 <?php include "views/includes/required-scripts.php" ?>
 <script>
-    $('.toast').toast("show");
+  $('.toast').toast("show");
 </script>
 </body>
 

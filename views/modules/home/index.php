@@ -1,5 +1,5 @@
 <!-- Imports -->
-<?php include "includes/verify-authentication.php"; ?>
+<?php require_once "includes/verify-authentication.php"; ?>
 
 <!-- View -->
 <!DOCTYPE html>
